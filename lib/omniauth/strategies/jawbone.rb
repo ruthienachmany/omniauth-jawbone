@@ -17,25 +17,64 @@ module OmniAuth
       option :client_options, {
         :site => 'https://jawbone.com',
         :authorize_url => '/auth/oauth2/auth',
-        :token_url => '/auth/oauth2/auth/token'
+        :token_url => '/auth/oauth2/token'
       }
-      option :authorize_params, {}
-      option :authorize_options, [:scope]
-      option :auth_token_params, {}
+      # option :authorize_params, {}
+      # option :authorize_options, [:scope]
+      # option :auth_token_params, {}
 
-      def request_phase
-        super
-      end
+      # def request_phase
+      #   super
+      # end
 
-      uid{ user_data['id'] }
+      # uid{ user_data['id'] }
 
       info do
         {
           'basic_read' => user_data['basic_read']
         }
       end
+#josh rowley
+       def request_phase
+        options[:authorize_params] = {
+          :name => options['app_name'],
+          :scope => options['scope'] || 'read'
+        }
+        options[:authorize_params].merge!(:expiration => options['expiration']) if options['expiration']
+        super
+      end
 
+      def raw_info
+        @raw_info ||= MultiJson.decode(access_token.get('/1/members/me').body)
+      end
+#josh rowley
     
+#git sleep
+  attr_accessible :first_name, :last_name, :token, :xid
+  
+  def self.temporary_code_to_token(code)
+    json = HTTParty.post(
+      "https://jawbone.com/auth/oauth2/token",
+      :body => {
+        :client_id => ENV["JAWBONE_CLIENT_ID"],
+        :client_secret => ENV["JAWBONE_SECRET"],
+        :grant_type => "authorization_code",
+        :code => code
+      }
+    ).body
+    return JSON.parse(json)["access_token"]
+  end
+
+  def self.token_to_user_info(token)
+    HTTParty.get(
+      "https://jawbone.com/nudge/api/users/@me",
+      :headers => {
+        "Authorization" => "Bearer #{token}"
+        }
+    )["data"]
+  end
+#end
+
       def user_data
         access_token.options[:mode] = :query
         user_data ||= access_token.get('/nudge/api/users/@me').parsed
