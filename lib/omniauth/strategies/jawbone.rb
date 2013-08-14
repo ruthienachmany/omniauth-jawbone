@@ -14,44 +14,26 @@ module OmniAuth
     # OAuth 2.0.
     class Jawbone
       include OmniAuth::Strategy
+
+attr_accessible :first_name, :last_name, :token, :xid
+
       option :client_options, {
         :site => 'https://jawbone.com',
         :authorize_url => '/auth/oauth2/auth',
         :token_url => '/auth/oauth2/token'
-      }
-      # option :authorize_params, {}
-      # option :authorize_options, [:scope]
-      # option :auth_token_params, {}
-
-      # def request_phase
-      #   super
-      # end
-
-      # uid{ user_data['id'] }
-
-      info do
-        {
-          'basic_read' => user_data['basic_read']
         }
-      end
-#josh rowley
-       def request_phase
-        options[:authorize_params] = {
-          :name => options['app_name'],
-          :scope => options['scope'] || 'read'
-        }
-        options[:authorize_params].merge!(:expiration => options['expiration']) if options['expiration']
-        super
-      end
 
-      def raw_info
-        @raw_info ||= MultiJson.decode(access_token.get('/1/members/me').body)
-      end
-#josh rowley
-    
-#git sleep
-  attr_accessible :first_name, :last_name, :token, :xid
-  
+      def request_phase
+        Omniauth::Form.build url:callback_url do 
+    <%= form_tag "https://jawbone.com/auth/oauth2/auth", :method => "GET" do %>
+    <%= hidden_field_tag 'client_id', ENV["JAWBONE_CLIENT_ID"] %>
+    <%= hidden_field_tag 'response_type', 'code' %>
+    <%= hidden_field_tag 'scope', 'basic_read sleep_read' %>
+    <%= hidden_field_tag 'redirect_uri', "http://www.gitsleep.com/auth" %>
+    <%= submit_tag "Go get token and brb" %>
+   end
+end
+
   def self.temporary_code_to_token(code)
     json = HTTParty.post(
       "https://jawbone.com/auth/oauth2/token",
@@ -73,7 +55,16 @@ module OmniAuth
         }
     )["data"]
   end
-#end
+
+ credentials do
+        
+        hash = {'token' => access_token.token}
+        hash.merge!('refresh_token' => access_token.refresh_token) if access_token.expires? && access_token.refresh_token
+        hash.merge!('expires_at' => access_token.expires_at) if access_token.expires?
+        hash.merge!('expires' => access_token.expires?)
+        hash
+      end
+
 
       def user_data
         access_token.options[:mode] = :query
