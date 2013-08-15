@@ -1,5 +1,5 @@
 module OmniAuth
   module Jawbone
-    VERSION = "0.0.8"
+    VERSION = "0.0.21"
   end
 end
