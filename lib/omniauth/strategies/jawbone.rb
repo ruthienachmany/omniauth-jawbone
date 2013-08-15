@@ -4,6 +4,7 @@ require 'oauth2'
 require 'omniauth'
 require 'timeout'
 require 'securerandom'
+require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
@@ -20,7 +21,7 @@ module OmniAuth
         :authorize_url => '/auth/oauth2/auth',
         :token_url => '/auth/oauth2/token'
         }
-
+    
       def request_phase
         super
       end
@@ -68,78 +69,3 @@ end
 
 
 OmniAuth.config.add_camelization 'jawbone', 'Jawbone'
-
-      # option :client_options, {
-      #   :site => 'https://jawbone.com',
-      #   :authorize_url => '/auth/oauth2/auth',
-      #   :token_url => '/auth/oauth2/token'
-      #   }
-
-
- #      def client
- #        ::OAuth2::Client.new(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], :site => 'https://jawbone.com', :authorize_url => '/auth/oauth2/auth', :token_url => '/auth/oauth2/token')
- #      end
-
-
-
- #      # def request_phase
- #      #   Omniauth::Form.build url:callback_url do 
- #      #     #text_field  'client_id', 'ENV["CLIENT_ID"]'
- #      #     text_field 'response_type', 'code'
- #      #     text_field 'scope', 'basic_read sleep_read'
- #      #     text_field 'redirect_uri', "http://www.gitsleep.com/auth"
- #      #   end
- #      # end
-
- #  # def self.temporary_code_to_token(code)
- #  #   json = HTTParty.post(
- #  #     "https://jawbone.com/auth/oauth2/token",
- #  #     :body => {
- #  #       :client_id => ENV["CLIENT_ID"],
- #  #       :client_secret => ENV["CLIENT_SECRET"],
- #  #       :grant_type => "authorization_code",
- #  #       :code => code
- #  #     }
- #  #   ).body
- #  #   return JSON.parse(json)["access_token"]
- #  # end
-
- #  # def self.token_to_user_info(token)
- #  #   HTTParty.get(
- #  #     "https://jawbone.com/nudge/api/users/@me",
- #  #     :headers => {
- #  #       "Authorization" => "Bearer #{token}"
- #  #       }
- #  #   )["data"]
- #  # end
-
- # credentials do
-        
- #        hash = {'token' => access_token.token}
- #        hash.merge!('refresh_token' => access_token.refresh_token) if access_token.expires? && access_token.refresh_token
- #        hash.merge!('expires_at' => access_token.expires_at) if access_token.expires?
- #        hash.merge!('expires' => access_token.expires?)
- #        hash
- #      end
-
-
- #      def user_data
- #        access_token.options[:mode] = :query
- #        user_data ||= access_token.get('/nudge/api/users/@me').parsed
- #      end
-
-#     end
-#   end
-# end
-
-
-      # uid { user_data['xid'] }
-
-      #     info do
-      #       {
-      #         token = token
-      #         photo = user_info["image"]
-      #         first_name = user_info["first"]
-      #         last_name = user_info["last"]
-      #        }
-      #     end

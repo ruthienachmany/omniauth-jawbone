@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["ruthie.nachmany@flatironschool.com", "maxwell.jacobson@flatironschool.com", "sarah.duve@flatironschool.com"]
   gem.description   = %q{OmniAuth strategy for Jawbone.}
   gem.summary       = %q{OmniAuth strategy for Jawbone.}
-  gem.homepage      = "https://github.com/railsjedi/omniauth-jawbone"
+  gem.homepage      = "https://github.com/ruthienachmany/omniauth-jawbone"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
