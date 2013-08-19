@@ -52,10 +52,10 @@ module OmniAuth
         {:raw_info => raw_info}
       end
 
-      # def raw_info
-      #   access_token.options[:mode] = :query
-      #   @raw_info ||= access_token.get('user').parsed
-      # end
+      def raw_info
+        access_token.options[:mode] = :query
+        @raw_info ||= access_token.get('user').parsed
+      end
 
 
       def user_data
