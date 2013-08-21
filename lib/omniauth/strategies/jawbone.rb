@@ -6,10 +6,9 @@ require 'timeout'
 require 'securerandom'
 require 'omniauth-oauth2'
 
-module OmniAuth #here I'm inheriting behaviors from the OmniAuth module
-  module Strategies #here I'm inheriting behaviors from the Omniauth::Strategies module
-    class Jawbone < OmniAuth::Strategies::OAuth2 #declaring a class for my new OmniAuth strategy
-      #include OmniAuth::Strategy 
+module OmniAuth
+  module Strategies
+    class Jawbone < OmniAuth::Strategies::OAuth2
 
       option :client_options, {
         :site => 'https://jawbone.com',
@@ -29,11 +28,6 @@ module OmniAuth #here I'm inheriting behaviors from the OmniAuth module
           'last_name' => raw_info['last'],
         }
       end
-
-      # def raw_info
-      #   access_token.options[:mode] = :query
-      #   @raw_info ||= access_token.get('user').parsed
-      # end
 
 
       def user_data
