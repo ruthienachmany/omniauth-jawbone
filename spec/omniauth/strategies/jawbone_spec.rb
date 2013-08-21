@@ -2,6 +2,7 @@ require 'spec_helper'
 require_relative '../../../lib/omniauth/strategies/jawbone'
 
 describe OmniAuth::Strategies::Jawbone do
+
   subject do
     OmniAuth::Strategies::Jawbone.new({})
   end
@@ -12,15 +13,15 @@ describe OmniAuth::Strategies::Jawbone do
     end
 
     it "should have correct authorize path" do
-      subject.options.client_options.authorize_path.should eq("/auth/oauth2/auth")
+      subject.options.client_options.authorize_url.should eq("/auth/oauth2/auth")
     end
 
     it "should have the correct request token path" do
-      subject.options.client_options.request_token_path.should eq("/auth/oauth2/token)
+      subject.options.client_options.token_url.should eq("/auth/oauth2/token")
     end
 
     it "should have the correct access token path" do
-      subject.options.client_options.access_token_path.should eq("/1/OAuthGetAccessToken")
+      subject.options.client_options.scope.should eq("basic_readsleep_read")
     end
   end
 end
