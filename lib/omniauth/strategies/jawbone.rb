@@ -18,14 +18,14 @@ module OmniAuth
         :token_url => '/auth/oauth2/token'
         }
 
-      uid { raw_info['xid'].to_s }
+      uid { raw_info['data']['xid'].to_s }
 
       info do
         {
-          'id' => raw_info['xid'],
-          'photo' => raw_info['photo'],
-          'first_name' => raw_info['first'],
-          'last_name' => raw_info['last'],
+          'id' => raw_info['data']['xid'],
+          'photo' => raw_info['data']['image'],
+          'first_name' => raw_info['data']['first'],
+          'last_name' => raw_info['data']['last'],
         }
       end
 
