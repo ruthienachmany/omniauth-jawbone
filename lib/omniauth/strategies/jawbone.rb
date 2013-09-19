@@ -29,10 +29,15 @@ module OmniAuth
         }
       end
 
-
       def user_data
         access_token.options[:mode] = :query
         user_data ||= access_token.get('/nudge/api/users/@me').parsed
+      end
+
+      def raw_info
+        @raw_info ||= MultiJson.load(access_token.get('/nudge/api/users/@me').body)
+      rescue ::Errno::ETIMEDOUT
+        raise ::Timeout::Error
       end
 
     end
