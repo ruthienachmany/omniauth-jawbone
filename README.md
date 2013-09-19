@@ -1,13 +1,17 @@
 # OmniAuth Jawbone
 
-This is the unofficial OmniAuth strategy for authenticating to Jawbone. To
-use it, you'll need to sign up for an OAuth2 Application ID and Secret
-once Jawbone releases their public API.
+Updated 2013.09.19 to work with the officially released Jawbone API.
+
+This is an OmniAuth strategy for authenticating to Jawbone. To
+use it, you'll need to [sign up](https://jawbone.com/up/developer) for an OAuth2 Application ID and Secret.
 
 ## Basic Usage
 
     use OmniAuth::Builder do
-      provider :jawbone, ENV['JAWBONE_CLIENT_ID'], ENV['JAWBONE_CLIENT_SECRET'], :scope => "basic_read mood_read"
+      provider :jawbone, 
+        ENV['JAWBONE_CLIENT_ID'], 
+        ENV['JAWBONE_CLIENT_SECRET'], 
+        :scope => "basic_read mood_read"
     end
 
 ## Original License
