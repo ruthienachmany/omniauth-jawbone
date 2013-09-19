@@ -18,21 +18,26 @@ module OmniAuth
         :token_url => '/auth/oauth2/token'
         }
 
-      uid { raw_info['xid'].to_s }
+      uid { raw_info['data']['xid'].to_s }
 
       info do
         {
-          'id' => raw_info['xid'],
-          'photo' => raw_info['photo'],
-          'first_name' => raw_info['first'],
-          'last_name' => raw_info['last'],
+          'id' => raw_info['data']['xid'],
+          'photo' => raw_info['data']['image'],
+          'first_name' => raw_info['data']['first'],
+          'last_name' => raw_info['data']['last'],
         }
       end
-
 
       def user_data
         access_token.options[:mode] = :query
         user_data ||= access_token.get('/nudge/api/users/@me').parsed
+      end
+
+      def raw_info
+        @raw_info ||= MultiJson.load(access_token.get('/nudge/api/users/@me').body)
+      rescue ::Errno::ETIMEDOUT
+        raise ::Timeout::Error
       end
 
     end
