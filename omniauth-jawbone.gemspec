@@ -2,8 +2,8 @@
 require File.expand_path('../lib/omniauth-jawbone/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Ruthie Nachmany", "Max Jacobson", "Sarah Duve"]
-  gem.email         = ["ruthie.nachmany@flatironschool.com", "maxwell.jacobson@flatironschool.com", "sarah.duve@flatironschool.com"]
+  gem.authors       = ["Ruthie Nachmany", "Andrew P. Brett", "Jeff Baird"]
+  gem.email         = ["ruthie.nachmany@flatironschool.com"]
   gem.description   = %q{OmniAuth strategy for Jawbone.}
   gem.summary       = %q{OmniAuth strategy for Jawbone.}
   gem.homepage      = "https://github.com/ruthienachmany/omniauth-jawbone"
