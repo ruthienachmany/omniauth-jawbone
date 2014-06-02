@@ -37,7 +37,7 @@ end
 
 Please see the [OmniAuth Getting Started section](https://github.com/intridea/omniauth#getting-started) for more important details about how to integrate omniauth-jawbone into your project.
 
-As with other OAuth2 2.0 providers, the token (which you need to get
+As with other OAuth 2.0 providers, the token (which you need to get
 Jawbone data from their API) is in the [auth
 hash](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema), in
 `request.env["omniauth.auth"]["credentials"]["token"]`.
