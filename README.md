@@ -7,12 +7,48 @@ use it, you'll need to [sign up](https://jawbone.com/up/developer) for an OAuth2
 
 ## Basic Usage
 
-    use OmniAuth::Builder do
-      provider :jawbone, 
-        ENV['JAWBONE_CLIENT_ID'], 
-        ENV['JAWBONE_CLIENT_SECRET'], 
-        :scope => "basic_read mood_read"
-    end
+Add the strategy to your `Gemfile`:
+
+```ruby
+gem 'omniauth-jawbone'
+```
+
+Then integrate the strategy into your middleware:
+
+```ruby
+use OmniAuth::Builder do
+  provider :jawbone, 
+    ENV['JAWBONE_CLIENT_ID'], 
+    ENV['JAWBONE_CLIENT_SECRET'], 
+    :scope => "basic_read mood_read"
+end
+```
+
+In Rails, create a new file under config/initializers called omniauth.rb to plug the strategy into your middleware stack.
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :jawbone, 
+    ENV['JAWBONE_CLIENT_ID'], 
+    ENV['JAWBONE_CLIENT_SECRET'], 
+    :scope => "basic_read mood_read"
+end
+```
+
+Please see the [OmniAuth Getting Started section](https://github.com/intridea/omniauth#getting-started) for more important details about how to integrate omniauth-jawbone into your project.
+
+As with other OAuth2 2.0 providers, the token (which you need to get
+Jawbone data from their API) is in the [auth
+hash](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema), in
+`request.env["omniauth.auth"]["credentials"]["token"]`.
+
+There will also be provided a refresh token (described [here](https://nudgestage.jawbone.com/up/developer/authentication)), in `request.env["omniauth.auth"]["credentials"]["refresh_token"]`.
+
+For additional information about OmniAuth, visit [OmniAuth wiki](https://github.com/intridea/omniauth/wiki).
+
+For a short tutorial on how to use OmniAuth in your Rails application, visit [this tutsplus.com tutorial](http://net.tutsplus.com/tutorials/ruby/how-to-use-omniauth-to-authenticate-your-users/).
+
+(The above stolen and adapted from [omniauth-fitbit](https://github.com/tkgospodinov/omniauth-fitbit))
 
 ## Original License
 
