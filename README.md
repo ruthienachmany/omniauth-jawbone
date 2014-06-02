@@ -36,17 +36,17 @@ end
 ```
 
 As with other OAuth2 2.0 providers, the token (which you need to get
-Jawbone data from their API) is in the (auth
-hash)[https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema], in
+Jawbone data from their API) is in the [auth
+hash](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema), in
 `request.env["omniauth.auth"]["credentials"]["token"]`.
 
-There will also be provided a refresh token (described (here)[https://nudgestage.jawbone.com/up/developer/authentication]), in `request.env["omniauth.auth"]["credentials"]["refresh_token"]`.
+There will also be provided a refresh token (described [here](https://nudgestage.jawbone.com/up/developer/authentication)), in `request.env["omniauth.auth"]["credentials"]["refresh_token"]`.
 
 For additional information about OmniAuth, visit [OmniAuth wiki](https://github.com/intridea/omniauth/wiki).
 
 For a short tutorial on how to use OmniAuth in your Rails application, visit [this tutsplus.com tutorial](http://net.tutsplus.com/tutorials/ruby/how-to-use-omniauth-to-authenticate-your-users/).
 
-(The above stolen and adapted from (omniauth-fitbit)[https://github.com/tkgospodinov/omniauth-fitbit])
+(The above stolen and adapted from [omniauth-fitbit](https://github.com/tkgospodinov/omniauth-fitbit))
 
 ## Original License
 
